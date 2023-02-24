@@ -26,7 +26,6 @@ app.post("/insertEntry", (req, res) => {
   const patientData = (({  age, sex, target }) => ({age, sex, target }))(data);
   // Separate the other values into a new object
   const recordData = (({ exang, ca, cp, thalach, fbs, rest_ecg, chol,trtbps }) => ({ exang, ca, cp, thalach, fbs, rest_ecg, chol,trtbps }))(data);
-
   // Send response
   res.send("Data received");
 });
