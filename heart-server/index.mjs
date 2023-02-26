@@ -1,5 +1,5 @@
 import "./loadEnvironment.mjs";
-import db from "./mongoconn.mjs";
+import { insertData, deleteData, updateData, readData } from './functions/functions.mjs';
 
 import express from "express";
 const app = express();
@@ -10,10 +10,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/fullData", async (req, res) => {
-  const patientsCollection = db.collection("patients");
-  const patientsDocuments = await patientsCollection.find().toArray();
-  const recordsCollection = db.collection("medicalRecords");
-  const recordsDocuments = await recordsCollection.find().toArray();
+  const patientsDocuments = await readData("patients",{})
+  const recordsDocuments = await readData("medicalRecords",{})
   const fullData = patientsDocuments.concat(recordsDocuments);
   res.json(fullData);
 });
