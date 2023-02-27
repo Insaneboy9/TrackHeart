@@ -1,5 +1,6 @@
 import "./loadEnvironment.mjs";
-import { insertData, deleteData, updateData, readData } from './functions/functions.mjs';
+import { readData, insertData } from "./functions/functions.mjs";
+import { csvToDb } from "./functions/csvToDb.mjs";
 
 import express from "express";
 const app = express();
@@ -10,9 +11,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/fullData", async (req, res) => {
-  const patientsDocuments = await readData("patients",{})
-  const recordsDocuments = await readData("medicalRecords",{})
-  const fullData = patientsDocuments.concat(recordsDocuments);
+  const patientsDocuments = await readData("patients", {});
+  const recordsDocuments = await readData("medicalRecords", {});
+  console.log(patientsDocuments)
+  const fullData = patientsDocuments.map((val,index) => ({...val,...recordsDocuments[index]}));
   res.json(fullData);
 });
 
@@ -20,11 +22,16 @@ app.get("/fullData", async (req, res) => {
 app.post("/insertEntry", (req, res) => {
   // Retrieve data from request body
   const data = req.body;
-  // Separate the "sex" and "age" values into a new object
-  const patientData = (({  age, sex, target }) => ({age, sex, target }))(data);
-  // Separate the other values into a new object
-  const recordData = (({ exang, ca, cp, thalach, fbs, rest_ecg, chol,trtbps }) => ({ exang, ca, cp, thalach, fbs, rest_ecg, chol,trtbps }))(data);
+
   // Send response
+  res.send("Data received");
+});
+
+// Handle CSV to DB
+app.get("/csvToDb", async (req, res) => { 
+  var dataArray = await csvToDb(); // first element represents patient data, second element represents medical records
+  await insertData("patients",dataArray[0])
+  await insertData("medicalRecords",dataArray[1])
   res.send("Data received");
 });
 
