@@ -22,7 +22,7 @@ function RadioButton({ title, label, register, options }) {
                 required: "This field is required",
               })}
               value={index}
-              control={<Radio />}
+              control={<Radio required={true} />}
               label={option}
             />
           ))}

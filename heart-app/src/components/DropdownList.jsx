@@ -19,6 +19,7 @@ function DropdownList({ title, options, label, register, value }) {
           {title}
         </InputLabel>
         <Select
+          required
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={item}
