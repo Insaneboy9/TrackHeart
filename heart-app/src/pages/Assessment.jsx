@@ -44,7 +44,7 @@ function Assessment() {
               />
             </div>
             {errors.age && (
-              <p className="text-red text-center">{errors.age.message}</p>
+              <p className="text-red text-center mb-5">{errors.age.message}</p>
             )}
             <RadioButton
               title="Gender"
@@ -91,6 +91,11 @@ function Assessment() {
                 placeholder="Enter blood pressure"
               />
             </div>
+            {errors.trtbps && (
+              <p className="text-red text-center mb-5">
+                {errors.trtbps.message}
+              </p>
+            )}
             <div className="mb-5 flex flex-col">
               <span className="text-black text-opacity-60 mb-1">
                 Cholestoral in mg/dl fetched via BMI sensor
@@ -105,6 +110,9 @@ function Assessment() {
                 placeholder="Enter blood pressure"
               />
             </div>
+            {errors.chol && (
+              <p className="text-red text-center mb-5">{errors.chol.message}</p>
+            )}
             <RadioButton
               title="Fasting Blood Sugar > 120 mg/dl"
               label="fbs"
@@ -136,6 +144,11 @@ function Assessment() {
                 placeholder="Enter blood pressure"
               />
             </div>
+            {errors.thalach && (
+              <p className="text-red text-center mb-5">
+                {errors.thalach.message}
+              </p>
+            )}
             <div className="w-full justify-center items-center flex">
               <button className="p-5 bg-red w-3/4 rounded-lg mt-10 mb-5">
                 Submit
