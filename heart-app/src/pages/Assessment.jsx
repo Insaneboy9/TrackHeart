@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import { useForm } from "react-hook-form";
 import RadioButton from "../components/RadioButton";
 import DropdownList from "../components/DropdownList";
@@ -11,6 +12,8 @@ import DropdownList from "../components/DropdownList";
 function Assessment() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ function Assessment() {
   } = useForm();
 
   const handleValid = async (data) => {
+    setLoading(true)
     try {
       const response = await axios.post("http://localhost:8080/predict", data, {
         headers: {
@@ -27,7 +31,8 @@ function Assessment() {
       // handle the data received from the backend
       const responseData = response.data;
       console.log(responseData);
-      navigate("/home");
+      setLoading(false)
+      navigate("/results", { state: { output:responseData } });
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
@@ -40,6 +45,11 @@ function Assessment() {
         <h1 className="text-center mt-10 mb-10 font-opensans text-3xl font-bold text-accentColor">
           PATIENT INFORMATION
         </h1>
+        {loading ? (
+          <div className="w-full h-full flex justify-center items-center">
+            <Loader />
+          </div>
+        )  : (
         <div className="bg-white w-4/6 flex justify-center items-center m-auto rounded-lg p-5 bg-blue-500 shadow-lg ">
           <form className="w-1/2" onSubmit={handleSubmit(handleValid)}>
             <div className="mb-5 flex flex-col">
@@ -198,6 +208,7 @@ function Assessment() {
             </div>
           </form>
         </div>
+        )}
       </div>
     </div>
   );
