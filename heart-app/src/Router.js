@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Results from "./pages/Results";
 import Login from "./pages/Login";
 import Assessment from "./pages/Assessment";
+import Patient from "./pages/Patient";
+import UpdatePatient from "./pages/UpdatePatient";
 
 function Router() {
   return (
@@ -14,6 +16,12 @@ function Router() {
           <Route path="home/" element={<Home />} />
           <Route path="results/" index element={<Results />} />
           <Route path="assessment/" index element={<Assessment />} />
+          <Route path="patients/">
+            <Route index element={<Patient />} />
+            <Route path=":patientId" index element={<UpdatePatient />} />
+          </Route>
+
+          {/* <Route path="patients/" index element={<Patient />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

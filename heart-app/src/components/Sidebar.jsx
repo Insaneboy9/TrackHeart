@@ -2,6 +2,7 @@ import React from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { Link } from "react-router-dom";
 
 function Sidebar() {
@@ -21,19 +22,25 @@ function Sidebar() {
           Menu
         </p>
         <Link to="/home">
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-5">
             <DashboardIcon className="icon mr-2" />
             <span className="font-playfair">Dashboard</span>
           </li>
         </Link>
+        <Link to="/patients">
+          <li className="flex items-center mb-5">
+            <AccountBoxIcon className="icon mr-2" />
+            <span className="font-playfair">Patients</span>
+          </li>
+        </Link>
         <Link to="/assessment">
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-5">
             <LocalHospitalIcon className="icon mr-2" />
             <span className="font-playfair">Assessment</span>
           </li>
         </Link>
         <Link to="/results">
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-5">
             <AssessmentIcon className="icon mr-2" />
             <span className="font-playfair">Result</span>
           </li>

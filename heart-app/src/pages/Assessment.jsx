@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import RadioButton from "../components/RadioButton";
@@ -10,6 +10,7 @@ import DropdownList from "../components/DropdownList";
 
 function Assessment() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,16 +19,17 @@ function Assessment() {
 
   const handleValid = async (data) => {
     try {
-      const response = await axios.post('http://localhost:8080/predict', data, {
+      const response = await axios.post("http://localhost:8080/predict", data, {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
       // handle the data received from the backend
       const responseData = response.data;
       console.log(responseData);
+      navigate("/home");
     } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
+      console.error("There was a problem with the fetch operation:", error);
     }
   };
   return (
@@ -115,7 +117,7 @@ function Assessment() {
                 placeholder="Enter previous peak value"
               />
             </div>
-            
+
             <div className="mb-5 flex flex-col">
               <span className="text-black text-opacity-60 mb-1">
                 Resting Blood Pressure (in mm Hg)

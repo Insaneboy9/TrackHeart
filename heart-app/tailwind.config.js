@@ -5,12 +5,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        red: "#DC4492",
+        red: "#ff4757",
         grey: "#2f3542",
         lightGrey: "#a4b0be",
         bg: "#dfe4ea",
         black: "#000000",
-        accentColor: "#1366B2",
+        green: "#7bed9f",
+        accentColor: "#3742fa",
       },
       backgroundImage: (theme) => ({
         rainbow:
@@ -25,6 +26,9 @@ module.exports = {
       },
       content: {
         brush: "url('./assets/brush.png')",
+      },
+      height: {
+        xl: "30rem",
       },
     },
     screens: {

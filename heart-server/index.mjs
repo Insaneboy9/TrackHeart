@@ -40,12 +40,12 @@ app.get("/chestPainChartData", async (req, res) => {
     ...recordsDocuments[index],
   }));
 
-  var chestPain = {
-    0: { output: 0, label: "Typical Angina" },
-    1: { output: 0, label: "Atypical Angina" },
-    2: { output: 0, label: "Non-anginal Pain" },
-    3: { output: 0, label: "Asymptomatic" },
-  };
+  var chestPain = [
+    { output: 0, label: "Typical Angina" },
+    { output: 0, label: "Atypical Angina" },
+    { output: 0, label: "Non-anginal Pain" },
+    { output: 0, label: "Asymptomatic" },
+  ];
 
   for (var i = 0; i < fullData.length; i++) {
     if (fullData[i].cp == 1) {
@@ -71,14 +71,14 @@ app.get("/ecgChartResult", async (req, res) => {
     ...recordsDocuments[index],
   }));
 
-  var ecg = {
-    0: { output: 0, label: "Normal" },
-    1: { output: 0, label: "ST-T Wave Abnormality" },
-    2: {
+  var ecg = [
+    { output: 0, label: "Normal" },
+    { output: 0, label: "ST-T Wave Abnormality" },
+    {
       output: 0,
       label: "Ventricular Hypertrophy by Estes' Criteria",
     },
-  };
+  ];
 
   for (var i = 0; i < fullData.length; i++) {
     if (fullData[i].rest_ecg == 0) {
@@ -101,14 +101,14 @@ app.get("/ageChartData", async (req, res) => {
     ...recordsDocuments[index],
   }));
 
-  var ageBtw = {
-    0: { count: 0, output: 0, label: "0-20" },
-    1: { count: 0, output: 0, label: "20-40" },
-    2: { count: 0, output: 0, label: "40-60" },
-    3: { count: 0, output: 0, label: "60-80" },
-    4: { count: 0, output: 0, label: "80-100" },
-    5: { count: 0, output: 0, label: "100+" },
-  };
+  var ageBtw = [
+    { count: 0, output: 0, label: "0-20" },
+    { count: 0, output: 0, label: "20-40" },
+    { count: 0, output: 0, label: "40-60" },
+    { count: 0, output: 0, label: "60-80" },
+    { count: 0, output: 0, label: "80-100" },
+    { count: 0, output: 0, label: "100+" },
+  ];
 
   for (var i = 0; i < fullData.length; i++) {
     if (fullData[i].age <= 20) {
