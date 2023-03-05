@@ -1,16 +1,16 @@
-import db from '../mongoconn.mjs';
+import db from "../mongoconn.mjs";
 
 // insert data
 export async function insertData(collectionName, data) {
-    const collection = db.collection(collectionName);
-    let result;
-    if (Array.isArray(data)) {
-      result = await collection.insertMany(data);
-    } else {
-      result = await collection.insertOne(data);
-    }
-    return result;
+  const collection = db.collection(collectionName);
+  let result;
+  if (Array.isArray(data)) {
+    result = await collection.insertMany(data);
+  } else {
+    result = await collection.insertOne(data);
   }
+  return result;
+}
 
 // delete data
 export async function deleteData(collectionName, filter) {

@@ -6,7 +6,7 @@ const client = new MongoClient(connectionString);
 let conn;
 try {
   conn = await client.connect();
-} catch(e) {
+} catch (e) {
   console.error(e);
 }
 
