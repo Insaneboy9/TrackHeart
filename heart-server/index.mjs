@@ -1,12 +1,21 @@
 import "./loadEnvironment.mjs";
 import { readData, insertData } from "./functions/functions.mjs";
 import { csvToDb } from "./functions/csvToDb.mjs";
-import { handleData } from "./functions/resultsconn.mjs";
+import { handleData, jsonToArray } from "./functions/resultsconn.mjs";
+import bodyParser from "body-parser";
 
 import { spawn } from "child_process";
 import express from "express";
 const app = express();
 const port = 8080;
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -33,17 +42,17 @@ app.get("/csvToDb", async (req, res) => {
 //Handle post request to receive array of data, predict outcome and insert data to db
 app.post("/predict", async (req, res) => {
   const data = req.body;
-  var answer = "done"
-  const inputArray = [59, 1, 1, 144, 283, 1, 0, 132, 1, 2.6, 1, 1,1]; //sample test, to remove after check data variable
+  const filteredArray = jsonToArray(data)
   const python = spawn("python", [
     "./knearestneighbour/knearestneighLOAD.py",
-    JSON.stringify(inputArray),
+    JSON.stringify(filteredArray),
   ]);
 
   // Listen for data from the Python script via stdout
-  python.stdout.on("data", (data) => { //uncomment below to post to db and set answer as the output
-    // handleData(data, inputArray);
-    // answer = data
+  python.stdout.on("data", (data) => { 
+    console.log(`Received data from Python: ${data}`);
+    res.send(data)
+    // handleData(data, filteredArray); // This is to insert data to db
   });
 
   // Listen for errors from the Python script
@@ -54,10 +63,11 @@ app.post("/predict", async (req, res) => {
   // Listen for the Python script to exit
   python.on("close", (code) => {
     console.log(`Python script exited with code ${code}`);
-    res.send(answer);
   });
 });
 
+
+//Port 8080
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });

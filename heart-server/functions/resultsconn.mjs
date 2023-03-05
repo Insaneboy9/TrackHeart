@@ -10,3 +10,22 @@ import { insertData } from "./functions.mjs";
     await insertData("patients", patientJson);
     await insertData("medicalRecords", recordJson);
   };
+
+  export const jsonToArray = (data) => {
+    const arr = [
+      data.age,
+      data.sex,
+      data.cp,
+      data.trtbps,
+      data.chol,
+      data.fbs,
+      data.rest_ecg,
+      data.thalach,
+      data.exang,
+      data.oldpeak,
+      data.slp,
+      data.ca,
+      data.thall
+    ];
+    return arr
+  }

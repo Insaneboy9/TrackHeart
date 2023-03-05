@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
-
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import RadioButton from "../components/RadioButton";
@@ -17,9 +17,19 @@ function Assessment() {
   } = useForm();
 
   const handleValid = async (data) => {
-    console.log(data);
+    try {
+      const response = await axios.post('http://localhost:8080/predict', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      // handle the data received from the backend
+      const responseData = response.data;
+      console.log(responseData);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
   };
-
   return (
     <div className="bg-bg flex">
       <Sidebar />
@@ -77,6 +87,35 @@ function Assessment() {
               ]}
               value={[1, 2, 3, 4]}
             />
+            <DropdownList
+              title="Slope Value"
+              label="slp"
+              register={register}
+              options={["0", "1", "2"]}
+              value={[0, 1, 2]}
+            />
+            <DropdownList
+              title="Thal Rate"
+              label="thall"
+              register={register}
+              options={["0", "1", "2", "3"]}
+              value={[0, 1, 2, 3]}
+            />
+            <div className="mb-5 flex flex-col">
+              <span className="text-black text-opacity-60 mb-1">
+                Previous Peak
+              </span>
+              <input
+                {...register("oldpeak", {
+                  required: "This field is required",
+                })}
+                className="w-full rounded-md p-2 border-2"
+                type="number"
+                min={0}
+                placeholder="Enter previous peak value"
+              />
+            </div>
+            
             <div className="mb-5 flex flex-col">
               <span className="text-black text-opacity-60 mb-1">
                 Resting Blood Pressure (in mm Hg)
@@ -91,6 +130,7 @@ function Assessment() {
                 placeholder="Enter blood pressure"
               />
             </div>
+
             {errors.trtbps && (
               <p className="text-red text-center mb-5">
                 {errors.trtbps.message}
