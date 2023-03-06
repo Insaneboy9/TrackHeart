@@ -59,9 +59,12 @@ function Home() {
       <div className="w-5/6">
         <Navbar title={pathname.slice(1).toUpperCase()} />
         {loading ? (
-          <div className="w-full h-full flex justify-center items-center">
-            <Loader />
-          </div>
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 rounded-lg shadow-lg p-8">
+          <Loader className="w-12 h-12 text-indigo-500 mb-4" />
+          <h1 className="text-2xl font-bold text-gray-800 text-center pt-6">
+            Fetching latest dashboard...
+          </h1>
+        </div>
         ) : (
           <>
             <div className="p-5 flex gap-x-4 justify-center items-cente h-96">

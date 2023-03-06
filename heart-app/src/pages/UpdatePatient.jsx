@@ -23,7 +23,7 @@ function UpdatePatient() {
   const handleValid = async (data) => {
     console.log(data);
     const id = patientId;
-    const fullData = { id: { _id: id }, data: data };
+    const fullData = { id: id, data: data };
     setLoading(true);
     try {
       const response = await axios.put(
