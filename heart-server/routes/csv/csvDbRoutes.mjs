@@ -5,10 +5,13 @@ import { csvToDb } from "../../functions/csvToDb.mjs";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  var dataArray = await csvToDb(); // first element represents patient data, second element represents medical records
-  await insertData("patients", dataArray[0]);
-  await insertData("medicalRecords", dataArray[1]);
-  res.send("Data received");
+  try {
+    var patientData = await csvToDb(); // first element represents patient data, second element represents medical records
+    await insertData("patients", patientData);
+    res.send("Data received");
+  } catch (err) {
+    res.status(500).send("Error inserting data into database: " + err.message);
+  }
 });
 
 export default router;

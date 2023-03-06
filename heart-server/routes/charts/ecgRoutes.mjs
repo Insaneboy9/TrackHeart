@@ -5,11 +5,6 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
     const patientsDocuments = await readData("patients", {});
-    const recordsDocuments = await readData("medicalRecords", {});
-    const fullData = patientsDocuments.map((val, index) => ({
-      ...val,
-      ...recordsDocuments[index],
-    }));
   
     var ecg = [
       { output: 0, label: "Normal" },
@@ -20,12 +15,12 @@ router.get("/", async (req, res) => {
       },
     ];
   
-    for (var i = 0; i < fullData.length; i++) {
-      if (fullData[i].rest_ecg == 0) {
+    for (var i = 0; i < patientsDocuments.length; i++) {
+      if (patientsDocuments[i].rest_ecg == 0) {
         ecg[0].output++;
-      } else if (fullData[i].rest_ecg == 1) {
+      } else if (patientsDocuments[i].rest_ecg == 1) {
         ecg[1].output++;
-      } else if (fullData[i].rest_ecg == 2) {
+      } else if (patientsDocuments[i].rest_ecg == 2) {
         ecg[2].output++;
       }
     }

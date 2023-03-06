@@ -8,9 +8,6 @@ export const handleData = async (data, inputArray) => {
   var patientJson = {
     age: inputArray[0],
     sex: inputArray[1],
-    output: inputArray[13],
-  };
-  var recordJson = {
     cp: inputArray[2],
     trtbps: inputArray[3],
     chol: inputArray[4],
@@ -22,9 +19,9 @@ export const handleData = async (data, inputArray) => {
     slp: inputArray[10],
     caa: inputArray[11],
     thall: inputArray[12],
+    output: inputArray[13],
   };
   await insertData("patients", patientJson);
-  await insertData("medicalRecords", recordJson);
 };
 
 export const jsonToArray = (data) => {

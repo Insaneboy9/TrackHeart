@@ -1,7 +1,7 @@
 import csv from "csvtojson";
 
 export const csvToDb = async () => {
-  var patientData, recordData;
+  var patientData;
   await csv()
     .fromFile("heart.csv")
     .then((jsonObj) => {
@@ -10,8 +10,6 @@ export const csvToDb = async () => {
         age: obj.age,
         sex: obj.sex,
         output: obj.output,
-      }));
-      recordData = jsonObj.map((obj) => ({
         exang: obj.exng,
         ca: obj.caa,
         cp: obj.cp,
@@ -26,5 +24,5 @@ export const csvToDb = async () => {
       }));
     });
 
-  return [patientData, recordData];
+  return patientData;
 };

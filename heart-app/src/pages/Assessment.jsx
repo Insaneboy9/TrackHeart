@@ -45,9 +45,9 @@ function Assessment() {
           PATIENT INFORMATION
         </h1>
         {loading ? (
-          <div class="w-full h-full flex flex-col items-center justify-center bg-gray-100 rounded-lg shadow-lg p-8">
-            <Loader class="w-12 h-12 text-indigo-500 mb-4" />
-            <h1 class="text-2xl font-bold text-gray-800 text-center pt-6">
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 rounded-lg shadow-lg p-8">
+            <Loader className="w-12 h-12 text-indigo-500 mb-4" />
+            <h1 className="text-2xl font-bold text-gray-800 text-center pt-6">
               Running K Nearest Neighbour to get the most accurate result...
             </h1>
           </div>
