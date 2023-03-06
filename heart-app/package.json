@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@heroicons/react": "^2.0.16",
+    "@heroicons/vue": "^2.0.16",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",
     "@mui/x-data-grid": "^6.0.0",

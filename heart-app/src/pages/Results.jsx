@@ -1,8 +1,10 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
 import { Empty } from "antd";
+import { HeartOutlined } from "@ant-design/icons";
+
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 function Results() {
   const { pathname, state } = useLocation();
@@ -16,11 +18,21 @@ function Results() {
           PATIENT RESULT
         </h1>
         {state ? (
-          <div className="w-full h-full flex justify-center items-center">
+          <div className="flex justify-center items-center">
             {state.output ? (
-              <h1>The patient has a high chance of heart attack</h1>
+              <div className="flex flex-col items-center space-y-2">
+                <HeartOutlined style={{ fontSize: "48px", height: "64px", width: "64px" }} className="text-red mt-10" />
+                <h1 className="text-red text-2xl font-bold">
+                  The patient has a high chance of heart attack
+                </h1>
+              </div>
             ) : (
-              <h1>The patient has a low chance of heart attack</h1>
+              <div className="flex flex-col items-center space-y-2">
+                <HeartOutlined style={{ fontSize: "48px", height: "64px", width: "64px" }} className="text-green mt-5" />
+                <h1 className="text-green text-2xl font-bold">
+                  The patient has a low chance of heart attack
+                </h1>
+              </div>
             )}
           </div>
         ) : (
