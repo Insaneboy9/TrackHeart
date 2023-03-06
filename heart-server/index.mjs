@@ -1,18 +1,19 @@
 import "./loadEnvironment.mjs";
 import { handleData, jsonToArray } from "./functions/resultsconn.mjs";
-
 import bodyParser from "body-parser";
 import { spawn } from "child_process";
 import express from "express";
-
+import cors from "cors";
 import fullDataRoutes from "./routes/charts/fullDataRoutes.mjs";
 import chestPainRoutes from "./routes/charts/chestPainRoutes.mjs";
 import ecgRoutes from "./routes/charts/ecgRoutes.mjs";
 import ageRoutes from "./routes/charts/ageRoutes.mjs";
 import csvDbRoutes from "./routes/csv/csvDbRoutes.mjs";
+import updatePatient from "./routes/charts/updatePatient.mjs";
 
 const app = express();
 const port = 8080;
+app.use(cors());
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use((req, res, next) => {
@@ -21,7 +22,6 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
-
 
 app.get("/", (req, res) => {
   res.send("Server is up and running");
@@ -32,7 +32,7 @@ app.use("/chestPainChartData", chestPainRoutes);
 app.use("/ecgChartResult", ecgRoutes);
 app.use("/ageChartData", ageRoutes);
 app.use("/csvToDb", csvDbRoutes);
-
+app.use("/patients", updatePatient);
 
 //Handle post request to receive array of data, predict outcome and insert data to db
 app.post("/predict", async (req, res) => {

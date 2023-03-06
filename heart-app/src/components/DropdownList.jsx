@@ -5,7 +5,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-function DropdownList({ title, options, label, register, value }) {
+function DropdownList({
+  title,
+  options,
+  label,
+  register,
+  value,
+  defaultValue,
+}) {
   const [item, setItem] = React.useState("");
 
   const handleChange = (event) => {
@@ -19,10 +26,10 @@ function DropdownList({ title, options, label, register, value }) {
           {title}
         </InputLabel>
         <Select
+          defaultValue={defaultValue}
           required
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={item}
           {...register(`${label}`, {
             required: "This field is required",
           })}

@@ -5,12 +5,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 
-function RadioButton({ title, label, register, options }) {
+function RadioButton({ title, label, register, options, value }) {
   return (
     <div className="mb-5">
       <FormControl>
         <FormLabel id="demo-row-radio-buttons-group-label">{title}</FormLabel>
         <RadioGroup
+          defaultValue={value}
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
