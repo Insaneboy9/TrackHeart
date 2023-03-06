@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
-import { Empty } from 'antd';
+import { Empty } from "antd";
 
 function Results() {
   const { pathname, state } = useLocation();
@@ -17,14 +17,20 @@ function Results() {
         </h1>
         {state ? (
           <div className="w-full h-full flex justify-center items-center">
-          <h1>No Patient Results</h1>
-        </div>
-        ):(
-          <div className="flex justify-center items-center" >
-          <div>
-          <Empty style={{ fontSize: '3rem' }} 
-      imageStyle={{ height: '15rem' }}/>
+            {state.output ? (
+              <h1>The patient has a high chance of heart attack</h1>
+            ) : (
+              <h1>The patient has a low chance of heart attack</h1>
+            )}
           </div>
+        ) : (
+          <div className="flex justify-center items-center">
+            <div>
+              <Empty
+                style={{ fontSize: "3rem" }}
+                imageStyle={{ height: "15rem" }}
+              />
+            </div>
           </div>
         )}
       </div>
