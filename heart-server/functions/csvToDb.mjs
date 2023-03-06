@@ -19,6 +19,9 @@ export const csvToDb = async () => {
         fbs: obj.fbs,
         rest_ecg: obj.restecg,
         chol: obj.chol,
+        oldpeak: obj.oldpeak,
+        slp: obj.slp,
+        thall: obj.thall,
         trtbps: obj.trtbps,
       }));
     });
