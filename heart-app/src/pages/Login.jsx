@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function Login() {
   const {
@@ -11,7 +12,17 @@ function Login() {
   const navigate = useNavigate();
 
   const handleValid = async (data) => {
-    console.log(data);
+    try {
+      const response = await axios.post("http://localhost:8080/signin", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = response.data;
+      console.log(responseData);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
     navigate("/home");
   };
 
