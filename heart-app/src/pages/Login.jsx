@@ -19,11 +19,14 @@ function Login() {
         },
       });
       const responseData = response.data;
-      console.log(responseData);
+      if (responseData.status === "ok"){
+        navigate("/home");
+      } else {
+        alert("Invalid Username or Password")
+      }
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
-    navigate("/home");
   };
 
   return (
