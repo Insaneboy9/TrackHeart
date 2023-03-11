@@ -21,14 +21,20 @@ function Results() {
           <div className="flex justify-center items-center">
             {state.output ? (
               <div className="flex flex-col items-center space-y-2">
-                <HeartOutlined style={{ fontSize: "48px", height: "64px", width: "64px" }} className="text-red mt-10" />
+                <HeartOutlined
+                  style={{ fontSize: "48px", height: "64px", width: "64px" }}
+                  className="text-red mt-10"
+                />
                 <h1 className="text-red text-2xl font-bold">
                   The patient has a high chance of heart attack
                 </h1>
               </div>
             ) : (
               <div className="flex flex-col items-center space-y-2">
-                <HeartOutlined style={{ fontSize: "48px", height: "64px", width: "64px" }} className="text-green mt-5 `" />
+                <HeartOutlined
+                  style={{ fontSize: "48px", height: "64px", width: "64px" }}
+                  className="text-green mt-5 `"
+                />
                 <h1 className="text-green text-2xl font-bold">
                   The patient has a low chance of heart attack
                 </h1>

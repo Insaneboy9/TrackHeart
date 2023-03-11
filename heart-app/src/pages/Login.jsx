@@ -19,10 +19,11 @@ function Login() {
         },
       });
       const responseData = response.data;
-      if (responseData.status === "ok"){
+      localStorage.setItem("user", JSON.stringify(responseData));
+      if (responseData.status === "ok") {
         navigate("/home");
       } else {
-        alert("Invalid Username or Password")
+        alert("Invalid Username or Password");
       }
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
@@ -39,7 +40,7 @@ function Login() {
         />
       </div>
       <div className="flex-1 flex justify-center items-center">
-        <div className="w-1/2 h-1/2 min-w-min min-h-min bg-white bg-blue-500 shadow-lg border rounded-lg flex justify-center items-center flex-col">
+        <div className="w-1/2 h-1/2 min-w-min min-h-min bg-white shadow-lg border rounded-lg flex justify-center items-center flex-col">
           <img
             className="mb-8"
             src={require("../assets/logo.png")}

@@ -14,11 +14,11 @@ router.post("/", async (req, res) => {
     password: password,
   });
 
-  console.log(user)
+  console.log(user);
 
-  if (user.length>0) {
+  if (user.length > 0) {
     const token = jwt.sign({ username: user.name }, JWT_SECRET);
-    return res.json({ status: "ok", user: token });
+    return res.json({ status: "ok", user: token, username: username });
   } else {
     return res.json({ status: "error", user: false });
   }

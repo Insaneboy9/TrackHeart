@@ -39,12 +39,6 @@ function Sidebar() {
             <span className="font-playfair">Assessment</span>
           </li>
         </Link>
-        <Link to="/results">
-          <li className="flex items-center mb-5">
-            <AssessmentIcon className="icon mr-2" />
-            <span className="font-playfair">Result</span>
-          </li>
-        </Link>
       </ul>
     </div>
   );

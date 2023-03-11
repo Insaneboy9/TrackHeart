@@ -30,6 +30,9 @@ module.exports = {
       height: {
         xl: "30rem",
       },
+      minHeight: {
+        nav: "7rem",
+      },
     },
     screens: {
       xs: "480px",
