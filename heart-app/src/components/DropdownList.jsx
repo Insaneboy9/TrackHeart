@@ -13,12 +13,6 @@ function DropdownList({
   value,
   defaultValue,
 }) {
-  const [item, setItem] = React.useState("");
-
-  const handleChange = (event) => {
-    setItem(event.target.value);
-  };
-
   return (
     <Box sx={{ minWidth: 120, mb: 3 }}>
       <FormControl fullWidth>
@@ -33,7 +27,6 @@ function DropdownList({
           {...register(`${label}`, {
             required: "This field is required",
           })}
-          onChange={handleChange}
         >
           {options.map((option, index) => (
             <MenuItem

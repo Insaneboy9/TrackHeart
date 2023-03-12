@@ -7,34 +7,53 @@ import Loader from "../components/Loader";
 import { useForm } from "react-hook-form";
 import RadioButton from "../components/RadioButton";
 import DropdownList from "../components/DropdownList";
+import ComfirmDialog from "../components/ConfirmDialog";
 
 function Assessment() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subtitle: "",
+    onConfirm: () => {},
+  });
 
   const handleValid = async (data) => {
-    setLoading(true);
-    try {
-      const response = await axios.post("http://localhost:8080/predict", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      // handle the data received from the backend
-      const responseData = response.data;
-      console.log(responseData);
-      setLoading(false);
-      navigate("/results", { state: { output: responseData } });
-    } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-    }
+    console.log(data);
+    setConfirmDialog({
+      isOpen: true,
+      title: "Submit",
+      subtitle: "Are you sure to submit?",
+      onConfirm: async () => {
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+        setLoading(true);
+        try {
+          const response = await axios.post(
+            "http://localhost:8080/predict",
+            data,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          // handle the data received from the backend
+          const responseData = response.data;
+          console.log(responseData);
+          setLoading(false);
+          navigate("/results", { state: { output: responseData } });
+        } catch (error) {
+          console.error("There was a problem with the fetch operation:", error);
+        }
+      },
+    });
   };
   return (
     <div className="bg-bg flex">
@@ -217,6 +236,10 @@ function Assessment() {
           </>
         )}
       </div>
+      <ComfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </div>
   );
 }

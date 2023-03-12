@@ -5,11 +5,32 @@ import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import Datatable from "../components/Datatable";
 import Loader from "../components/Loader";
+import ComfirmDialog from "../components/ConfirmDialog";
 
 function Patient() {
   const { pathname } = useLocation();
   const [patientData, setPatientData] = useState();
   const [loading, setLoading] = useState(true);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subtitle: "",
+    onConfirm: () => {},
+  });
+
+  // close dialog on delete
+  const onDeleteClick = (id) => {
+    console.log("PRESS");
+    setConfirmDialog({
+      isOpen: true,
+      title: "Delete",
+      subtitle: "Are you sure to delete?",
+      onConfirm: () => {
+        deleteRow(id);
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+      },
+    });
+  };
 
   const getPatientData = async () => {
     try {
@@ -114,7 +135,11 @@ function Patient() {
                 View
               </div>
             </Link>
-            <button onClick={() => {}}>
+            <button
+              onClick={() => {
+                onDeleteClick(params.row.id);
+              }}
+            >
               <div className="border-red p-1 border-2 rounded-md text-red">
                 Delete
               </div>
@@ -124,6 +149,17 @@ function Patient() {
       },
     },
   ];
+
+  // delete a row
+  const deleteRow = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/delete/${id}`);
+      getPatientData();
+      console.log(response);
+    } catch (Error) {
+      console.log(Error);
+    }
+  };
 
   return (
     <div className="bg-bg flex">
@@ -146,6 +182,10 @@ function Patient() {
           )}
         </div>
       </div>
+      <ComfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </div>
   );
 }
