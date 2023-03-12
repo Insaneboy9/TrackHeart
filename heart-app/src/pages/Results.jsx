@@ -69,7 +69,7 @@ function Results() {
                         height: "100px",
                         width: "100px",
                       }}
-                      className="text-green mt-10 mb-10"
+                      className="text-darkGreen mt-10 mb-10"
                     />
                   </motion.div>
                   <motion.div
@@ -78,7 +78,7 @@ function Results() {
                     transition={{ type: "spring", duration: 2 }}
                     className="flex flex-col items-center space-y-2"
                   >
-                    <h1 className="text-green text-2xl font-bold">
+                    <h1 className="text-darkGreen text-2xl font-bold">
                       The patient has a low chance of heart attack
                     </h1>
                     <p className="text-center text-grey">

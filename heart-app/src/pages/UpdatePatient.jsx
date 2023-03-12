@@ -57,7 +57,7 @@ function UpdatePatient() {
             <Loader />
           </div>
         ) : (
-          <div className="bg-white w-4/6 flex justify-center items-center m-auto rounded-lg p-5 bg-blue-500 shadow-lg ">
+          <div className="bg-white w-4/6 flex justify-center items-center m-auto rounded-lg p-5 shadow-lg ">
             <form className="w-1/2" onSubmit={handleSubmit(handleValid)}>
               <RadioButton
                 title="Exercise Induced Angina"

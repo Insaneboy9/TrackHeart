@@ -11,6 +11,7 @@ module.exports = {
         bg: "#dfe4ea",
         black: "#000000",
         green: "#7bed9f",
+        darkGreen: "#0be881",
         accentColor: "#3742fa",
       },
       backgroundImage: (theme) => ({
