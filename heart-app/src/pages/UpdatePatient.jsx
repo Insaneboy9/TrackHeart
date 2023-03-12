@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import { useForm } from "react-hook-form";
 import RadioButton from "../components/RadioButton";
 import DropdownList from "../components/DropdownList";
+import ComfirmDialog from "../components/ConfirmDialog";
 
 function UpdatePatient() {
   const { state } = useLocation();
@@ -19,30 +20,44 @@ function UpdatePatient() {
     formState: { errors },
   } = useForm();
   console.log(state);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subtitle: "",
+    onConfirm: () => {},
+  });
 
   const handleValid = async (data) => {
     console.log(data);
     const id = patientId;
     const fullData = { id: id, data: data };
-    setLoading(true);
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/patients`,
-        fullData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    setConfirmDialog({
+      isOpen: true,
+      title: "Update",
+      subtitle: "Are you sure to update?",
+      onConfirm: async () => {
+        setConfirmDialog({ ...confirmDialog, isOpen: false });
+        setLoading(true);
+        try {
+          const response = await axios.put(
+            `http://localhost:8080/patients`,
+            fullData,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          // handle the data received from the backend
+          const responseData = response.data;
+          console.log(responseData);
+          setLoading(false);
+          navigate("/patients");
+        } catch (error) {
+          console.error("There was a problem with the fetch operation:", error);
         }
-      );
-      // handle the data received from the backend
-      const responseData = response.data;
-      console.log(responseData);
-      setLoading(false);
-      navigate("/patients");
-    } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-    }
+      },
+    });
   };
   return (
     <div className="bg-bg flex">
@@ -213,6 +228,10 @@ function UpdatePatient() {
           </div>
         )}
       </div>
+      <ComfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </div>
   );
 }

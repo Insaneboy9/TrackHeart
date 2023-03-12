@@ -132,7 +132,7 @@ function Patient() {
           <div className="flex gap-2">
             <Link to={`/patients/${params.row.id}`} state={params.row.fullData}>
               <div className="p-1 border-2 border-green rounded-md text-green">
-                View
+                Edit
               </div>
             </Link>
             <button
@@ -165,21 +165,23 @@ function Patient() {
     <div className="bg-bg flex">
       <Sidebar />
       <div className="w-5/6 flex flex-col">
-        <Navbar title={pathname.slice(1).toUpperCase()} />
-        <div className="p-10 h-full">
-          <h1 className="text-3xl font-opensans font-bold text-accentColor mb-10">
-            Patient Table
-          </h1>
-          {loading ? (
-            <div className="w-full h-full flex flex-col items-center justify-center">
-              <Loader className="w-12 h-12 text-indigo-500 mb-4" />
-              <h1 className="text-2xl font-bold text-gray-800 text-center pt-6">
-                Fetching latest table...
-              </h1>
-            </div>
-          ) : (
-            <Datatable columns={patientColumns} rows={patientRows} />
-          )}
+        <div className="w-full h-full flex flex-col">
+          <Navbar title={pathname.slice(1).toUpperCase()} />
+          <div className="p-10 h-full">
+            <h1 className="text-3xl font-opensans font-bold text-accentColor mb-10">
+              Patient Table
+            </h1>
+            {loading ? (
+              <div className="w-full h-5/6 flex flex-col items-center justify-center">
+                <Loader className="w-12 h-12 text-indigo-500 mb-4" />
+                <h1 className="text-2xl font-bold text-gray-800 text-center pt-6">
+                  Fetching latest table...
+                </h1>
+              </div>
+            ) : (
+              <Datatable columns={patientColumns} rows={patientRows} />
+            )}
+          </div>
         </div>
       </div>
       <ComfirmDialog
