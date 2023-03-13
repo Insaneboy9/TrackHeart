@@ -1,31 +1,39 @@
 import express from "express";
-import { readData } from "../../functions/functions.mjs";
+import db from "../../mongoconn.mjs";
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const patientsDocuments = await readData("patients", {});
-  
-    var chestPain = [
-      { output: 0, label: "Typical Angina" },
-      { output: 0, label: "Atypical Angina" },
-      { output: 0, label: "Non-anginal Pain" },
-      { output: 0, label: "Asymptomatic" },
-    ];
-  
-    for (var i = 0; i < patientsDocuments.length; i++) {
-      if (patientsDocuments[i].cp == 1) {
-        chestPain[0].output++;
-      } else if (patientsDocuments[i].cp == 2) {
-        chestPain[1].output++;
-      } else if (patientsDocuments[i].cp == 3) {
-        chestPain[2].output++;
-      } else if (patientsDocuments[i].cp == 4) {
-        chestPain[3].output++;
-      }
+  const collection = db.collection("patients");
+
+  const result = await collection
+    .aggregate([
+      {
+        $match: { cp: { $in: ["1", "2", "3", "4"] } },
+      },
+      {
+        $group: {
+          _id: "$cp",
+          output: { $sum: 1 },
+        },
+      },
+    ])
+    .toArray();
+  const data = result.map((r) => {
+    var label;
+    if (r._id === "1") {
+      label = "Typical Angina";
+    } else if (r._id === "2") {
+      label = "Atypical Angina";
+    } else if (r._id === "3") {
+      label = "Non-Anginal Pain";
+    } else if (r._id === "4") {
+      label = "Asymptomatic";
     }
-  
-    res.json(chestPain);
+    return { output: r.output, label: label };
+  });
+
+  res.json(data);
 });
 
 export default router;

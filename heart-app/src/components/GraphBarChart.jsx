@@ -2,7 +2,7 @@ import React from "react";
 import ApexChart from "react-apexcharts";
 
 function GraphBarChart({ title, data }) {
-  const cleanedData = data.filter((item) => item !== null);
+  // const cleanedData = data.filter((item) => item !== null);
 
   return (
     <div className="w-full h-full bg-white p-5 rounded-lg">
@@ -14,12 +14,12 @@ function GraphBarChart({ title, data }) {
           {
             name: "Age Range",
             type: "column",
-            data: cleanedData.map((item) => item.count),
+            data: data.map((item) => item.count),
           },
           {
             name: "Heart Attack",
             type: "line",
-            data: cleanedData.map((item) => item.output),
+            data: data.map((item) => item.output),
           },
         ]}
         options={{
@@ -35,7 +35,7 @@ function GraphBarChart({ title, data }) {
             enabled: true,
             enabledOnSeries: [1],
           },
-          labels: cleanedData.map((item) => item.label),
+          labels: data.map((item) => item._id),
           yaxis: [
             {
               title: {

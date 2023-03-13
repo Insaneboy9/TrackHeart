@@ -109,7 +109,7 @@ function Assessment() {
                   label="ca"
                   register={register}
                   options={["0", "1", "2", "3"]}
-                  value={[0, 1, 2, 3]}
+                  value={["0", "1", "2", "3"]}
                 />
                 <DropdownList
                   title="Chest Pain Type"
@@ -121,21 +121,21 @@ function Assessment() {
                     "Non-anginal Pain",
                     "Asymptomatic",
                   ]}
-                  value={[1, 2, 3, 4]}
+                  value={["1", "2", "3", "4"]}
                 />
                 <DropdownList
                   title="Slope Value"
                   label="slp"
                   register={register}
                   options={["0", "1", "2"]}
-                  value={[0, 1, 2]}
+                  value={["0", "1", "2"]}
                 />
                 <DropdownList
                   title="Thal Rate"
                   label="thall"
                   register={register}
                   options={["0", "1", "2", "3"]}
-                  value={[0, 1, 2, 3]}
+                  value={["0", "1", "2", "3"]}
                 />
                 <div className="mb-5 flex flex-col">
                   <span className="text-black text-opacity-60 mb-1">
@@ -205,7 +205,7 @@ function Assessment() {
                     "Having ST-T wave abnormality",
                     "Showing probable or definite left ventricular hypertrophy by Estes' criteria",
                   ]}
-                  value={[0, 1, 2]}
+                  value={["0", "1", "2"]}
                 />
                 <div className="mb-5 flex flex-col">
                   <span className="text-black text-opacity-60 mb-1">

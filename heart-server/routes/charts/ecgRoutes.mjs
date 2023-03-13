@@ -1,31 +1,37 @@
 import express from "express";
-import { readData } from "../../functions/functions.mjs";
+import db from "../../mongoconn.mjs";
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const patientsDocuments = await readData("patients", {});
-  
-    var ecg = [
-      { output: 0, label: "Normal" },
-      { output: 0, label: "ST-T Wave Abnormality" },
+  const collection = db.collection("patients");
+
+  const result = await collection
+    .aggregate([
       {
-        output: 0,
-        label: "Ventricular Hypertrophy by Estes' Criteria",
+        $match: { rest_ecg: { $in: ["0", "1", "2"] } },
       },
-    ];
-  
-    for (var i = 0; i < patientsDocuments.length; i++) {
-      if (patientsDocuments[i].rest_ecg == 0) {
-        ecg[0].output++;
-      } else if (patientsDocuments[i].rest_ecg == 1) {
-        ecg[1].output++;
-      } else if (patientsDocuments[i].rest_ecg == 2) {
-        ecg[2].output++;
-      }
+      {
+        $group: {
+          _id: "$rest_ecg",
+          output: { $sum: 1 },
+        },
+      },
+    ])
+    .toArray();
+
+  const data = result.map((r) => {
+    var label;
+    if (r._id === "0") {
+      label = "Normal";
+    } else if (r._id === "1") {
+      label = "ST-T Wave Abnormality";
+    } else if (r._id === "2") {
+      label = "Ventricular Hypertrophy by Estes' Criteria";
     }
-  
-    res.json(ecg);
+    return { output: r.output, label: label };
+  });
+  res.json(data);
 });
 
 export default router;
