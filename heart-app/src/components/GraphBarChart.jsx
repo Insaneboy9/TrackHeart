@@ -2,8 +2,6 @@ import React from "react";
 import ApexChart from "react-apexcharts";
 
 function GraphBarChart({ title, data }) {
-  // const cleanedData = data.filter((item) => item !== null);
-
   return (
     <div className="w-full h-full bg-white p-5 rounded-lg">
       <h1 className="text-accentColor font-bold text-2xl mb-10">{title}</h1>

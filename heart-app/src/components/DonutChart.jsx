@@ -2,7 +2,6 @@ import React from "react";
 import ApexChart from "react-apexcharts";
 
 function DonutChart({ title, data }) {
-  //   console.log(data?.map((item) => item.output));
   return (
     <div className="w-1/2 bg-white p-5 rounded-lg h-full">
       <div className="">
