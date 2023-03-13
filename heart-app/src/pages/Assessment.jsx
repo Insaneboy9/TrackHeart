@@ -182,7 +182,7 @@ function Assessment() {
                     className="w-full rounded-md p-2 border-2"
                     type="number"
                     min={0}
-                    placeholder="Enter blood pressure"
+                    placeholder="Enter cholestoral level"
                   />
                 </div>
                 {errors.chol && (
@@ -218,7 +218,7 @@ function Assessment() {
                     className="w-full rounded-md p-2 border-2"
                     type="number"
                     min={0}
-                    placeholder="Enter blood pressure"
+                    placeholder="Enter max heart rate"
                   />
                 </div>
                 {errors.thalach && (

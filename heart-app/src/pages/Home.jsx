@@ -49,8 +49,10 @@ function Home() {
     setLoading(false);
   };
 
+
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, []);
 
   return (

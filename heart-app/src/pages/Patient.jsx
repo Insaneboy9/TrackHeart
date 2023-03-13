@@ -51,28 +51,28 @@ function Patient() {
     no: index + 1,
     id: patient._id,
     age: patient.age,
-    sex: patient.sex == 1 ? "Male" : "Female",
-    exang: patient.exang == 1 ? "Yes" : "No",
+    sex: patient.sex === 1 ? "Male" : "Female",
+    exang: patient.exang === 1 ? "Yes" : "No",
     ca: patient.ca,
     cp:
-      patient.cp == 1
+      patient.cp === 1
         ? "Typical Angina"
-        : patient.cp == 2
+        : patient.cp === 2
         ? "Atypical Angina"
-        : patient.cp == 3
+        : patient.cp === 3
         ? "Non-anginal Pain"
         : "Asymptomatic",
     trtbps: patient.trtbps,
     chol: patient.chol,
-    fbs: patient.fbs == 1 ? "True" : "False",
+    fbs: patient.fbs === 1 ? "True" : "False",
     ecg:
-      patient.rest_ecg == 0
+      patient.rest_ecg === 0
         ? "Normal"
-        : patient.rest_ecg == 1
+        : patient.rest_ecg === 1
         ? "ST-T Wave Abnormality"
         : "Venticular Hypertrophy by Estes' Criteria",
     thalach: patient.thalach,
-    output: patient.output == 1 ? "Yes" : "No",
+    output: patient.output === 1 ? "Yes" : "No",
   }));
 
   const patientColumns = [

@@ -9,7 +9,6 @@ import Sidebar from "../components/Sidebar";
 function Results() {
   const { pathname, state } = useLocation();
   const navigate = useNavigate();
-
   return (
     <div className="bg-bg flex">
       <Sidebar />
@@ -18,10 +17,9 @@ function Results() {
         <h1 className="text-center mt-10 mb-10 font-opensans text-3xl font-bold text-accentColor">
           PATIENT RESULT
         </h1>
-        {state && (
           <>
             <div className="flex justify-center items-center">
-              {state.output ? (
+              {state.output[0]===1 ? (
                 <div className="flex flex-col items-center space-y-2 w-1/2">
                   <motion.div
                     initial={{ scale: 10 }}
@@ -104,7 +102,6 @@ function Results() {
               </motion.button>
             </div>
           </>
-        )}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import updatePatient from "./routes/charts/updatePatient.mjs";
 import auth from "./routes/auth/auth.mjs";
 import { deleteData } from "./functions/functions.mjs";
 import { ObjectId } from "mongodb";
+import { handleData } from "./functions/resultsconn.mjs";
 
 const app = express();
 const port = 8080;
@@ -61,7 +62,7 @@ app.post("/predict", async (req, res) => {
   python.stdout.on("data", (data) => {
     console.log(`Received data from Python: ${data}`);
     res.send(data);
-    // handleData(data, filteredArray); // This is to insert data to db
+    handleData(data, filteredArray); // This is to insert data to db
   });
 
   // Listen for errors from the Python script
