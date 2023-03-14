@@ -19,7 +19,7 @@ function Results() {
         </h1>
           <>
             <div className="flex justify-center items-center">
-              {state.output[0]===1 ? (
+              {state.output[0]=== "1" ? (
                 <div className="flex flex-col items-center space-y-2 w-1/2">
                   <motion.div
                     initial={{ scale: 10 }}
