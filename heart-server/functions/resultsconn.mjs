@@ -4,7 +4,7 @@ import { insertData } from "./functions.mjs";
 export const handleData = async (data, inputArray) => {
   console.log(`Received data from Python: ${data}`);
   var singleArray = JSON.parse(data);
-  inputArray.push(`${singleArray[0]}`);
+  inputArray.push(String(singleArray[0]));
   var patientJson = {
     age: inputArray[0],
     sex: inputArray[1],
