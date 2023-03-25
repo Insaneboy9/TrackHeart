@@ -20,12 +20,12 @@ function Patient() {
 
   // close dialog on delete
   const onDeleteClick = (id) => {
-    console.log("PRESS");
     setConfirmDialog({
       isOpen: true,
       title: "Delete",
       subtitle: "Are you sure to delete?",
       onConfirm: () => {
+        setLoading(true)
         deleteRow(id);
         setConfirmDialog({ ...confirmDialog, isOpen: false });
       },
