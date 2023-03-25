@@ -30,6 +30,11 @@ router.get("/", async (req, res) => {
           output: { $sum: { $cond: [{ $eq: ["$output", "1"] }, 1, 0] } },
         },
       },
+      {
+        $sort: {
+          _id: 1
+        }
+      }
     ])
     .toArray();
 

@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import joblib
 
 # load the dataset
-data = pd.read_csv('heart.csv')
+data = pd.read_csv('../heart.csv')
 
 # preprocess the data
 X = data.drop('output', axis=1)
@@ -20,7 +20,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # create a pipeline to chain the feature scaling and classifier steps
 pipe = Pipeline([
     ('scaler', StandardScaler()),
-    ('classifier', KNeighborsClassifier(n_neighbors=5))
+    ('classifier', KNeighborsClassifier(n_neighbors=10))
 ])
 
 # fit the pipeline to the training data
