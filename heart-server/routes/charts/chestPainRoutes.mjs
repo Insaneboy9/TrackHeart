@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
       {
         $group: {
           _id: "$cp",
-          output: { $sum: 1 },
+          output: { $sum: { $cond: [{ $eq: ["$output", "1"] }, 1, 0] } },
         },
       },
     ])
