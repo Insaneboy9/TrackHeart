@@ -7,7 +7,7 @@ Frontend UI are found in /heart-app
 Backend APIs are found in /heart-server
 Basic Program Commands
 
-## Navigating Directory
+## To use
 
 Run all the client and server to use the app
 
